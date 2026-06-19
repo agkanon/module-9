@@ -1,0 +1,28 @@
+ 1  docker ps
+    2  clear
+    3  docker run hello-world
+    4  docker network ls
+    5  docker network inspect bridge
+    6  docker run -d --name nginx-bridge -p 8080:80 nginx
+    7  docker ps
+    8  http://3.84.98.172:8080
+    9  http://localhost:8080
+   10  curl http://localhost:8080
+   11  clear
+   12  docker run -d --name nginx-host --network host nginx
+   13  docker ps
+   14  sudo ss -tulpn | grep :80
+   15  http://3.84.98.172
+   16  http://localhost:80
+   17  http://3.84.98.172/
+   18  clear
+   19  docker run -it --name alpine-none --network none alpine sh
+   20  clear
+   21  docker network create custom-net
+   22  docker run -dit --name container1 --network custom-net alpine sh
+   23  docker run -dit --name container2 --network custom-net alpine sh
+   24  docker exec -it container1 sh
+   25  docker stop nginx-bridge nginx-host container1 container2
+   26  docker rm nginx-bridge nginx-host container1 container2 alpine-none
+   27  docker network rm custom-net
+   28  history
