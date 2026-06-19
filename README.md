@@ -5,7 +5,8 @@
 - Install Docker on an AWS EC2 instance.
 - Configure Docker permissions for a non-root user.
 - Run the `hello-world` Docker image.
-- Demonstrate Docker networking modes:Bridge Network
+- Demonstrate Docker networking modes:
+- Bridge Network
 - Host Network
 - None Network
 - Custom Bridge Network
@@ -14,9 +15,6 @@
 
 ---
 
-# Environment Details
-ComponentValueCloud ProviderAWSInstance Typet2.microOperating SystemUbuntu 24.04 LTSDocker VersionDocker Engine Community EditionUserubuntu
----
 
 # Task 1: Launch AWS EC2 Instance
 
@@ -36,10 +34,8 @@ ssh -i mykey.pem ubuntu@
 ### Screenshot
 Add screenshot:
 
-```
-
 ![EC2 Instance](screenshots/ec2-instance.PNG)
-```
+
 
 ---
 
@@ -103,9 +99,7 @@ CONTAINER ID   IMAGE   COMMAND   CREATED   STATUS   PORTS   NAMES
 
 ### Screenshot
 
-```
 ![docker-non-root](screenshots/docker-non-root.PNG)
-```
 
 ---
 
@@ -125,19 +119,14 @@ This message shows that your installation appears to be working correctly.
 
 ### Screenshot
 
-```
 ![hello-world](screenshots/hello-world.PNG)
-```
 
 ---
 
-# Docker Networking Overview
-Docker supports multiple networking modes.
-
-Network TypeDescriptionBridgeDefault isolated networkHostShares host network stackNoneNo network connectivityCustom BridgeUser-defined bridge network
----
 
 # Task 5: Bridge Network
+
+The Bridge Network is Docker's default network mode. When a container is started without specifying a network, Docker automatically connects it to the default bridge network. Containers on the same bridge network can communicate with each other using IP addresses, while external access requires port mapping.
 
 ## View Existing Networks
 
@@ -179,9 +168,8 @@ Nginx Welcome Page appears.
 
 ### Screenshot
 
-```
 ![bridge-network](screenshots/bridge-network.PNG)
-```
+
 
 ## Observation
 
@@ -191,6 +179,8 @@ Nginx Welcome Page appears.
 ---
 
 # Task 6: Host Network
+
+In Host Network mode, the container shares the host machine's network stack. The container does not receive its own IP address, and no port mapping is required.
 
 ## Run Container Using Host Network
 
@@ -215,9 +205,9 @@ http://localhost
 
 ### Screenshot
 
-```
+
 ![host-network](screenshots/host-network.PNG)
-```
+
 
 ## Observation
 
@@ -228,6 +218,8 @@ http://localhost
 ---
 
 # Task 7: None Network
+
+The None Network completely disables networking for the container. Only the loopback interface (lo) is available.
 
 ## Run Alpine Container
 
@@ -252,10 +244,9 @@ ping: bad address 'google.com'
 
 ### Screenshot
 
-```
 
 ![none-network](screenshots/none-network.PNG)
-```
+
 
 ## Observation
 
@@ -265,6 +256,8 @@ ping: bad address 'google.com'
 ---
 
 # Task 8: Custom Bridge Network
+
+A Custom Bridge Network is a user-defined bridge network that provides automatic DNS-based service discovery. Containers can communicate using container names instead of IP addresses.
 
 ## Create Network
 
@@ -318,9 +311,9 @@ Expected:
 
 ### Screenshot
 
-```
+
 ![custom-bridge-ping](screenshots/custom-bridge-network.PNG)
-```
+
 
 ## Observation
 
@@ -329,8 +322,6 @@ Expected:
 
 ---
 
-# Network Comparison
-FeatureBridgeHostNoneCustom BridgeIsolationYesNoFullYesPort Mapping NeededYesNoN/AOptionalDNS ResolutionLimitedHostNoYesContainer CommunicationVia IPHost StackNoBy NameSecurityMediumLowHighHigh
 ---
 
 # Cleanup
@@ -350,24 +341,6 @@ Remove Custom Network
 docker network rm custom-net
 ```
 
----
-
-# Results
-✅ Docker installed successfully.
-
-✅ Non-root Docker access configured.
-
-✅ Hello-world container executed successfully.
-
-✅ Bridge network tested.
-
-✅ Host network tested.
-
-✅ None network tested.
-
-✅ Custom bridge network tested.
-
----
 
 # Repository Structure
 
